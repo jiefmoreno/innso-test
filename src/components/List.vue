@@ -21,10 +21,10 @@
         {{ props.item.status }}
       </td>
       <td class="text-xs-left">
-        {{ getFormattedDate(props.item.interaction_creation_date) }}
+        {{ getCreationDate(props.item.interaction_creation_date) }}
       </td>
       <td class="text-xs-left">
-        {{ getFormattedDate(props.item.due_date) }}
+        <DueDate :date="getDueDate(props.item.due_date)" />
       </td>
       <td class="text-xs-left">
         {{ props.item.assignedTO }}
@@ -39,12 +39,14 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import Contact from "./Contact";
+import DueDate from "./DueDate";
 import store from "../store";
 
 export default {
   store,
   components: {
-    Contact
+    Contact,
+    DueDate
   },
   computed: {
     headers: () => {
@@ -92,7 +94,10 @@ export default {
     this.fetchList();
   },
   methods: {
-    getFormattedDate(date) {
+    getDueDate(date) {
+      return new Date(date);
+    },
+    getCreationDate(date) {
       return new Date(date).toLocaleString();
     },
     ...mapActions(["fetchList"])
