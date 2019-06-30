@@ -10,26 +10,26 @@
     <v-content>
       <v-container>
         <Search />
-        <List/>
+        <List />
       </v-container>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import List from './components/List'
-import Search from './components/Search'
+import List from "./components/List";
+import Search from "./components/Search";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     List,
     Search
   },
-  data () {
+  data() {
     return {
       //
-    }
+    };
   }
-}
+};
 </script>
