@@ -1,4 +1,5 @@
 # innso-test
+A list of issues that you can order by the attribute you want. You also can contact easily the customer by phone or email.
 
 ## Project setup
 ```
@@ -13,11 +14,6 @@ npm run serve
 ### Compiles and minifies for production
 ```
 npm run build
-```
-
-### Run your tests
-```
-npm run test
 ```
 
 ### Lints and fixes files
