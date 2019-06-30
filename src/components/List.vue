@@ -15,7 +15,7 @@
         />
       </td>
       <td class="text-xs-left">
-        {{ props.item.customer.country_code }}
+        {{ getCountryFlag(props.item.customer.country_code) }}
       </td>
       <td class="text-xs-left">
         {{ props.item.status }}
@@ -38,6 +38,7 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+import countryCodeToFlag from "country-code-to-flag";
 import Contact from "./Contact";
 import DueDate from "./DueDate";
 import store from "../store";
@@ -57,7 +58,7 @@ export default {
           value: "customer.last_name"
         },
         {
-          text: "country code",
+          text: "country",
           align: "left",
           value: "customer.country_code"
         },
@@ -99,6 +100,9 @@ export default {
     },
     getCreationDate(date) {
       return new Date(date).toLocaleString();
+    },
+    getCountryFlag(countryCode) {
+      return countryCodeToFlag(countryCode);
     },
     ...mapActions(["fetchList"])
   }
