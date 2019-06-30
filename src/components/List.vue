@@ -29,6 +29,9 @@
       <td class="text-xs-left">
         {{ props.item.assignedTO }}
       </td>
+      <td class="text-xs-left">
+        <div class=" last-comment">{{ props.item.last_comment }}</div>
+      </td>
     </template>
   </v-data-table>
 </template>
@@ -75,6 +78,11 @@ export default {
           text: "assigned to",
           align: "left",
           value: "assignedTO"
+        },
+        {
+          text: "last comment",
+          align: "left",
+          value: "last_comment"
         }
       ];
     },
@@ -92,5 +100,17 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.last-comment {
+  overflow: hidden;
+  width: 250px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+@media screen and (min-width: 800px) {
+  .last-comment {
+    overflow: inherit;
+    white-space: normal;
+  }
+}
 </style>
