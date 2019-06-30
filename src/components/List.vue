@@ -54,7 +54,7 @@ export default {
         {
           text: "name",
           align: "left",
-          value: "customer.first_name"
+          value: "customer.last_name"
         },
         {
           text: "country code",
