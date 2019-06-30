@@ -1,64 +1,90 @@
 <template>
   <v-container>
-    List
+    <v-data-table
+      :headers="headers"
+      :items="list"
+      item-key="id"
+    >
+      <template v-slot:items="props">
+        <td class="text-xs-left">
+          {{ props.item.customer.first_name }} {{ props.item.customer.last_name }}
+        </td>
+        <td class="text-xs-left">
+          {{ props.item.customer.country_code }}
+        </td>
+        <td class="text-xs-left">
+          {{ props.item.status }}
+        </td>
+        <td class="text-xs-left">
+          {{ getFormattedDate(props.item.interaction_creation_date) }}
+        </td>
+        <td class="text-xs-left">
+          {{ getFormattedDate(props.item.due_date) }}
+        </td>
+        <td class="text-xs-left">
+          {{ props.item.assignedTO }}
+        </td>
+    </template>
+    </v-data-table>
   </v-container>
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      ecosystem: [
-        {
-          text: 'vuetify-loader',
-          href: 'https://github.com/vuetifyjs/vuetify-loader'
-        },
-        {
-          text: 'github',
-          href: 'https://github.com/vuetifyjs/vuetify'
-        },
-        {
-          text: 'awesome-vuetify',
-          href: 'https://github.com/vuetifyjs/awesome-vuetify'
-        }
-      ],
-      importantLinks: [
-        {
-          text: 'Documentation',
-          href: 'https://vuetifyjs.com'
-        },
-        {
-          text: 'Chat',
-          href: 'https://community.vuetifyjs.com'
-        },
-        {
-          text: 'Made with Vuetify',
-          href: 'https://madewithvuetifyjs.com'
-        },
-        {
-          text: 'Twitter',
-          href: 'https://twitter.com/vuetifyjs'
-        },
-        {
-          text: 'Articles',
-          href: 'https://medium.com/vuetify'
-        }
-      ],
-      whatsNext: [
-        {
-          text: 'Explore components',
-          href: 'https://vuetifyjs.com/components/api-explorer'
-        },
-        {
-          text: 'Select a layout',
-          href: 'https://vuetifyjs.com/layout/pre-defined'
-        },
-        {
-          text: 'Frequently Asked Questions',
-          href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions'
-        }
+import { mapActions, mapState } from 'vuex'
+import store from '../store'
 
-      ]
-    })
+  export default {
+    store,
+    computed: {
+      headers: () => {
+        return [
+          {
+            text: 'name',
+            align: 'left',
+            value: 'customer.first_name'
+          },
+          {
+            text: 'country code',
+            align: 'left',
+            value: 'customer.country_code'
+          },
+          {
+            text: 'status',
+            align: 'left',
+            value: 'status'
+          },
+          {
+            text: 'creation date',
+            align: 'left',
+            value: 'interaction_creation_date'
+          },
+          {
+            text: 'due date',
+            align: 'left',
+            value: 'due_date'
+          },
+          {
+            text: 'assigned to',
+            align: 'left',
+            value: 'assignedTO'
+          }
+        ];
+        },
+      ...mapState({
+        list: state => state.list
+      })
+    },
+    mounted() {
+      this.fetchList();
+    },
+    methods: {
+      getFormattedDate(date) {
+        return new Date(date).toLocaleString()
+      },
+      ...mapActions([
+      'fetchList'
+    ])
+    }
   }
 </script>
 
