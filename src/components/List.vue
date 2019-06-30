@@ -1,8 +1,8 @@
 <template>
-  <v-container>
     <v-data-table
       :headers="headers"
       :items="list"
+      :search="search"
       item-key="id"
     >
       <template v-slot:items="props">
@@ -26,7 +26,6 @@
         </td>
     </template>
     </v-data-table>
-  </v-container>
 </template>
 
 <script>
@@ -70,9 +69,7 @@ import store from '../store'
           }
         ];
         },
-      ...mapState({
-        list: state => state.list
-      })
+      ...mapState(['list', 'search'])
     },
     mounted() {
       this.fetchList();

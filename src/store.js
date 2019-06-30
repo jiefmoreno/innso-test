@@ -13,6 +13,7 @@ const store = new Vuex.Store({
     state: {
         fetching: false,
         list: [],
+        search: '',
         error: {}
     },
     mutations: {
@@ -27,6 +28,9 @@ const store = new Vuex.Store({
             state.fetching = false
             state.list = []
             state.error = error
+        },
+        updateSearch(state, { value }) {
+            state.search = value
         }
 
     },
@@ -34,11 +38,14 @@ const store = new Vuex.Store({
         async fetchList(context) {
             context.commit('fetching')
             try {
-                const response = await mockFetchApi();
+                const response = await mockFetchApi()
                 context.commit('fetchSuccess', { response })
             } catch (error) {
                 context.commit('fetchError', { error })
             }
+        },
+        updateSearch(context, value) {
+            context.commit('updateSearch', { value })
         }
     }
 })

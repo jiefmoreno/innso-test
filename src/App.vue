@@ -8,18 +8,23 @@
     </v-toolbar>
 
     <v-content>
-      <List/>
+      <v-container>
+        <Search />
+        <List/>
+      </v-container>
     </v-content>
   </v-app>
 </template>
 
 <script>
 import List from './components/List'
+import Search from './components/Search'
 
 export default {
   name: 'App',
   components: {
-    List
+    List,
+    Search
   },
   data () {
     return {
